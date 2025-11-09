@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import File from '../models/File';
+import Annotation from '../models/Annotation';
 import mongoose from 'mongoose';
 import { gfs } from '../db/db';
 import { Readable } from 'stream';
@@ -146,18 +147,28 @@ export const deleteFile = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'File metadata not found.' });
         }
 
+        // Delete all annotations associated with this file
+        const deletedAnnotations = await Annotation.deleteMany({ documentId: req.params.fileId });
+        console.log(`Deleted ${deletedAnnotations.deletedCount} annotations for file ${req.params.fileId}`);
+
+        // Delete the file from GridFS
         await gfs.delete(new mongoose.Types.ObjectId(file.gridFsId));
+        
+        // Delete the file metadata
         await File.findByIdAndDelete(req.params.fileId);
 
         res.status(200).json({
-            message: 'File deleted successfully.',
-            fileId: req.params.fileId
+            message: 'File and associated annotations deleted successfully.',
+            fileId: req.params.fileId,
+            annotationsDeleted: deletedAnnotations.deletedCount
         });
 
     } catch (error: any) {
         if (error.message && error.message.includes('File not found')) {
+             // Clean up annotations and metadata even if GridFS file is missing
+             await Annotation.deleteMany({ documentId: req.params.fileId });
              await File.findByIdAndDelete(req.params.fileId);
-             return res.status(200).json({ message: 'File metadata deleted (actual file was already missing).' });
+             return res.status(200).json({ message: 'File metadata and annotations deleted (actual file was already missing).' });
         }
         console.error("Error deleting file:", error);
         res.status(500).json({ message: "Server error while deleting file." });

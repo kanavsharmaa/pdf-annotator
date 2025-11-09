@@ -106,6 +106,11 @@ export const AnnotationLayer = ({
   const handleErase = (x: number, y: number) => {
     // Check each annotation to see if the click is within its bounds
     for (const annotation of pageAnnotations) {
+      // Check if user has permission to delete this annotation
+      if (!canDelete(annotation)) {
+        continue; // Skip annotations the user can't delete
+      }
+
       if (annotation.type === 'Highlight') {
         const data = annotation.data as HighlightData;
         // Check if click is within any of the highlight rects
