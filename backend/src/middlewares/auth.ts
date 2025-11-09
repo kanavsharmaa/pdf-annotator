@@ -35,3 +35,9 @@ export const isUser = checkRole([
   ROLES.D2,
   ROLES.R1,
 ]);
+
+export const canAnnotate = checkRole([
+  ROLES.A1,
+  ROLES.D1,
+  ROLES.D2,
+]);

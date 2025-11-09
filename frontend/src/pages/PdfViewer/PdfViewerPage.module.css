@@ -61,6 +61,28 @@
   background-color: var(--color-gray-100);
 }
 
+.pageContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.pageContainer.annotating {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.pageContainer.annotating .react-pdf__Page__textContent {
+  pointer-events: none;
+}
+
+.visibilityPanel {
+  padding: var(--spacing-md);
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-300);
+}
+
 .page {
   box-shadow: var(--shadow-lg);
   border-radius: var(--radius-sm);
