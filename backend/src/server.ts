@@ -17,7 +17,8 @@ const PORT = process.env.PORT || 4000;
 const corsOptions = {
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'x-user-role'],
+  exposedHeaders: ['Content-Range', 'X-Total-Count'],
   credentials: false,
   optionsSuccessStatus: 204
 };
