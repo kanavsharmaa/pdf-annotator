@@ -14,17 +14,19 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 // --- CORS Configuration ---
+const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  credentials: false,
+  optionsSuccessStatus: 204
+};
 
-// const corsOptions = {
-//   origin: '*', // Allow all origins
-//   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization', 'X-User-Role'],
-//   credentials: true
-// };
+// Apply CORS with the specified options
+app.use(cors(corsOptions));
 
-// app.use(cors(corsOptions));
-
-app.use(cors({ origin: "*" }));
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 
