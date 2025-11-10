@@ -31,6 +31,8 @@ app.use(express.json());
 app.use("/api/files", fileRoutes);
 app.use("/api/annotations", annotationRoutes);
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`🚀 Server running on http://localhost:${PORT}`);
+// });
+
+export default app;
