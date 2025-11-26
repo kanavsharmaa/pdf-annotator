@@ -48,7 +48,7 @@ The application is a full-stack **MERN** (MongoDB, Express.js, React.js, Node.js
 2.  Create a `.env` file in the `/backend` directory and configure your MongoDB URI.
     _Example `backend/.env` contents:_
     ```env
-    MONGO_URI=mongodb://localhost:27017/fileuploader
+    MONGO_URI={_Enter your mongodb connection string here_}
     PORT=4000
     ```
 3.  Start the backend server using `tsx`:
