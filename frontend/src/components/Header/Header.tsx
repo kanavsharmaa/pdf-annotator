@@ -17,7 +17,7 @@ export const Header = () => {
         <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
           <FileText className="h-6 w-6 text-primary" />
           <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            FloSmart PDF Annotator
+            PDF Annotator
           </h1>
         </Link>
 

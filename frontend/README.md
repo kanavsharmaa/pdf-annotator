@@ -1,4 +1,4 @@
-# FloSmart PDF Annotator - Frontend
+# PDF Annotator - Frontend
 
 A modern, production-ready React application for PDF file management and viewing with role-based access control.
 
